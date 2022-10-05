@@ -5,8 +5,8 @@ import PostItem from './PostItem'
 
 export class Content extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     render() {
