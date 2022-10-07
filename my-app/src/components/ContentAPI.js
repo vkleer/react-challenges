@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import API_KEY from '../secrets'
-import {savedPosts} from '../posts.json'
 import css from './css/Content.module.css'
 import PostItemAPI from './PostItemAPI'
 import Loader from './Loader'
@@ -13,6 +12,7 @@ export class ContentAPI extends Component {
         this.state = {
             isLoaded: false,
             posts: [],
+            savedPosts: [],
         };
     }
 
@@ -28,14 +28,15 @@ export class ContentAPI extends Component {
         this.setState({
             isLoaded: true,
             posts: fetchedPosts,
+            savedPosts: fetchedPosts,
         })
         console.log(fetchedPosts);
     }
 
     handleSearch = (event) => {
         let name = event.target.value;
-        const filteredPosts = savedPosts.filter(post => {
-            return post.name.toLowerCase().includes(name);
+        const filteredPosts = this.state.savedPosts.filter(post => {
+            return post.user.toLowerCase().includes(name);
         })
         this.setState({
             posts: filteredPosts,
@@ -59,7 +60,7 @@ export class ContentAPI extends Component {
                 <div className= {css.SearchResults}>
                     {
                         this.state.isLoaded ? (
-                            <PostItemAPI posts={this.state.posts} savedPosts={savedPosts} />
+                            <PostItemAPI posts={this.state.posts} savedPosts={this.state.savedPosts} />
                         ) : (
                             <Loader />
                         )
