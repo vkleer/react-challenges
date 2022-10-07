@@ -9,7 +9,7 @@ function PostItemAPI(props) {
                 <div key={id} className={css.SearchItem}>
                     <p>{type}</p>
                     <p>{user}</p>
-                    <img src={webformatURL} alt={`Photo of ${tags}`}/>
+                    <img src={webformatURL} alt={tags}/>
                     <p>{tags}</p>
                 </div>
             )
